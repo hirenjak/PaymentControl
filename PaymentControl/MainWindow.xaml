@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaymentControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="570"  MaxWidth="570" MinWidth="570">
 
     <Window.Resources>
         <Style TargetType="{x:Type ListView}">
@@ -26,28 +26,28 @@
 
         <DataTemplate x:Key="ListDataTemplate">
             <StackPanel Margin="0,0,0,0">
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="500">
-                    <TextBlock Text="商品名 : " />
-                    <TextBlock Text="{Binding name}" Width="150"/>
+                <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
+                    <TextBlock Text="商品名 : " Foreground="White" />
+                    <TextBlock Text="{Binding name}" Width="150" Foreground="White"/>
 
-                    <TextBlock Text="種別: " />
-                    <TextBlock Text="{Binding kind}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="500">
-                    <TextBlock Text="価格 : \"/>
-                    <TextBlock Text="{Binding price}" Width="75"/>
+                    <TextBlock Text="種別: " Foreground="White"/>
+                    <TextBlock Text="{Binding kind}" Foreground="White"/>
+                </DockPanel>
+                <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
+                    <TextBlock Text="価格 : \" Foreground="White"/>
+                    <TextBlock Text="{Binding price}" Width="75" Foreground="White"/>
 
-                    <TextBlock Text="現状 : " />
-                    <TextBlock Text="{Binding status}" Width="75"/>
+                    <TextBlock Text="現状 : " Foreground="White" />
+                    <TextBlock Text="{Binding status}" Width="75" Foreground="White"/>
 
-                    <TextBlock Text="優先度 : " />
-                    <TextBlock Text="{Binding priority}" Width="75"/>
-                </StackPanel>
+                    <TextBlock Text="優先度 : " Foreground="White"/>
+                    <TextBlock Text="{Binding priority}" Width="75" Foreground="White"/>
+                </DockPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,0" Width="500">
-                    <TextBlock Text="料金体制 : " Margin="0,0,0,0"/>
-                    <TextBlock Text="{Binding system}" Margin="0,0,10,0"/>
-                </StackPanel>
+                <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
+                    <TextBlock Text="料金体制 : " Margin="0,0,0,0" Foreground="White"/>
+                    <TextBlock Text="{Binding system}" Margin="0,0,10,0" Foreground="White"/>
+                </DockPanel>
             </StackPanel>
         </DataTemplate>
 
@@ -61,48 +61,52 @@
 
 
     </Window.Resources>
-    <Grid>
-        <ListView ItemsSource="{Binding}" Name="listView" Margin="0,98,0,0" BorderBrush="Gray" ContextMenu="{DynamicResource ItemContextMenu}" AlternationCount="2">
-            
-            
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource myHedderStyle}">
-                    <GridViewColumn CellTemplate="{StaticResource ListImageTemplate}"/>
-                    <GridViewColumn CellTemplate="{StaticResource ListDataTemplate}"/>
-                </GridView>
-            </ListView.View>
 
-        </ListView>
 
-        <DockPanel HorizontalAlignment="Left" LastChildFill="False" Width="517" Height="52" VerticalAlignment="Top" Margin="0,46,0,0">
-            
-        </DockPanel>
+    <StackPanel Background="Gray" Width="Auto" HorizontalAlignment="Stretch" >
+        <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" Background="DarkGray" >
+            <DockPanel Margin="0,5,0,0" LastChildFill="True">
+                <Button x:Name="button" Content="画像選択" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_PictSelect_Click"/>
+                <TextBox x:Name="pictureAddressBox" Margin="5,0,0,0" HorizontalAlignment="Left" Width="120" IsReadOnly="True"  Background="Gray" Foreground="White"/>
 
-        <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="70">
-            <StackPanel Orientation ="Horizontal">
-                <Button x:Name="button" Content="画像選択" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_PictSelect_Click"/>
-                <TextBox x:Name="pictureAddressBox" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="Auto" IsReadOnly="True"/>
+                <ComboBox x:Name="kindBox"  SelectedIndex="0" Text="道具" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" />
+                <ComboBox x:Name="priorityBox" SelectedIndex="2" Text="中" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="60" Background="Gray" Foreground="White"/>
+                <ComboBox x:Name="statusBox" SelectedIndex="0"  Text="検討中" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="80" Background="Gray" Foreground="White"/>
+                <ComboBox x:Name="systemBox" SelectedIndex="0" Text="買切り" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Width="Auto" Background="Gray" Foreground="White" />
+            </DockPanel>
+
+            <DockPanel Margin="0,5,0,0" LastChildFill="True">
+                <TextBox x:Name="nameBox"  Text="nameBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White"/>
+                <TextBox x:Name="priceBox"  Text="0" Height="23" Width="50" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White"/>
+                <TextBox x:Name="supplementalBox" Width="Auto" Text="supplementalBox" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Background="Gray" Foreground="White"/>
+            </DockPanel>
+
+            <StackPanel Orientation ="Horizontal" Margin="0,5,0,0">
+                <TextBox x:Name="originPageBox"  Text="originPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White"/>
+                <TextBox x:Name="paymentPageBox"  Text="paymentPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White"/>
             </StackPanel>
-            <StackPanel Orientation ="Horizontal">
-                <ComboBox x:Name="kindBox"  SelectedIndex="0" Text="道具" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" Width="120" />
-                <ComboBox x:Name="priorityBox" SelectedIndex="2" Text="中" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" Width="60"/>
-                <ComboBox x:Name="statusBox" SelectedIndex="0"  Text="検討中" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" Width="80"/>
-                <ComboBox x:Name="systemBox" SelectedIndex="0" Text="買切り" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" Width="60"/>
-            </StackPanel>
-            <StackPanel Orientation ="Horizontal">
-                <TextBox x:Name="nameBox"  Text="nameBox" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" Width="120" />
-                <TextBox x:Name="priceBox"  Text="0" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" />
-                <TextBox x:Name="supplementalBox"  Text="supplementalBox" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" Width="120" />
-                <TextBox x:Name="originPageBox"  Text="originPageBox" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" />
-                <TextBox x:Name="paymentPageBox"  Text="paymentPageBox" Height="23" VerticalAlignment="Top" Margin="0,0,0,0" />
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,5,0,5">
+                <Button x:Name="button_Apply"  Content="Apply" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Apply_Click" Background="Gray" Foreground="White"/>
+                <Button x:Name="button_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Save_Click" Background="Gray" Foreground="White"/>
             </StackPanel>
         </StackPanel>
-        
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,70,0,0">
-            <Button x:Name="button_Apply"  Content="Apply" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Apply_Click"/>
-            <Button x:Name="button_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Save_Click"/>
-        </StackPanel>
-        
-    </Grid>
+        <StackPanel>
+            <ListView ItemsSource="{Binding}" Name="listView" DockPanel.Dock="Bottom" VerticalAlignment="Stretch" Margin="0,0,0,0" BorderBrush="Gray" ContextMenu="{DynamicResource ItemContextMenu}" AlternationCount="2" Background="Gray" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
 
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListView.View>
+                    <GridView ColumnHeaderContainerStyle="{StaticResource myHedderStyle}">
+                        <GridViewColumn CellTemplate="{StaticResource ListImageTemplate}"/>
+                        <GridViewColumn CellTemplate="{StaticResource ListDataTemplate}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+    </StackPanel>
 </Window>
