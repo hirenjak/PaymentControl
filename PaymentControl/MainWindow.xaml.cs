@@ -138,6 +138,8 @@ namespace PaymentControl
                 }
             }
 
+            Console.WriteLine(listView.Height.ToString());
+
             // データ照合が無い場合に追加を行う
             lists.Add(new ItemsValue(tempID) { name = nameBox.Text, kind = kindBox.Text, price = int.Parse(priceBox.Text), originalPaget = originPageBox.Text, paymentPage = paymentPageBox.Text, priority = priorityBox.Text, status = statusBox.Text, supplemental = supplementalBox.Text, system = systemBox.Text });
         }

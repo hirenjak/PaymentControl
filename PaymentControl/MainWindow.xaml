@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaymentControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="570"  MaxWidth="570" MinWidth="570">
+        Title="MainWindow" Height="350" Width="570" MaxWidth="570" MinWidth="570">
 
     <Window.Resources>
         <Style TargetType="{x:Type ListView}">
@@ -33,6 +33,7 @@
                     <TextBlock Text="種別: " Foreground="White"/>
                     <TextBlock Text="{Binding kind}" Foreground="White"/>
                 </DockPanel>
+                
                 <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
                     <TextBlock Text="価格 : \" Foreground="White"/>
                     <TextBlock Text="{Binding price}" Width="75" Foreground="White"/>
@@ -46,7 +47,10 @@
 
                 <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
                     <TextBlock Text="料金体制 : " Margin="0,0,0,0" Foreground="White"/>
-                    <TextBlock Text="{Binding system}" Margin="0,0,10,0" Foreground="White"/>
+                    <TextBlock Text="{Binding system}" Margin="0,0,10,0" Foreground="White" Width="40"/>
+
+                    <TextBlock Text="備考 : " Margin="0,0,0,0" Foreground="White"/>
+                    <TextBlock Text="{Binding supplemental}" Margin="0,0,10,0" Foreground="White"/>
                 </DockPanel>
             </StackPanel>
         </DataTemplate>
@@ -63,8 +67,8 @@
     </Window.Resources>
 
 
-    <StackPanel Background="Gray" Width="Auto" HorizontalAlignment="Stretch" >
-        <StackPanel  HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" Background="DarkGray" >
+    <DockPanel  Background="Gray" Width="Auto" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" >
+        <StackPanel DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" Background="DarkGray" >
             <DockPanel Margin="0,5,0,0" LastChildFill="True">
                 <Button x:Name="button" Content="画像選択" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_PictSelect_Click"/>
                 <TextBox x:Name="pictureAddressBox" Margin="5,0,0,0" HorizontalAlignment="Left" Width="120" IsReadOnly="True"  Background="Gray" Foreground="White"/>
@@ -81,19 +85,21 @@
                 <TextBox x:Name="supplementalBox" Width="Auto" Text="supplementalBox" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Background="Gray" Foreground="White"/>
             </DockPanel>
 
-            <StackPanel Orientation ="Horizontal" Margin="0,5,0,0">
-                <TextBox x:Name="originPageBox"  Text="originPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White"/>
-                <TextBox x:Name="paymentPageBox"  Text="paymentPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White"/>
-            </StackPanel>
+            <DockPanel Margin="0,5,0,0" LastChildFill="True">
+                <TextBox x:Name="originPageBox"  Text="originPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White" Width="260"/>
+                <TextBox x:Name="paymentPageBox"  Text="paymentPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White" Width="Auto"/>
+            </DockPanel>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,5,0,5">
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,5,0,5">
                 <Button x:Name="button_Apply"  Content="Apply" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Apply_Click" Background="Gray" Foreground="White"/>
                 <Button x:Name="button_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Save_Click" Background="Gray" Foreground="White"/>
-            </StackPanel>
+            </DockPanel>
         </StackPanel>
-        <StackPanel>
-            <ListView ItemsSource="{Binding}" Name="listView" DockPanel.Dock="Bottom" VerticalAlignment="Stretch" Margin="0,0,0,0" BorderBrush="Gray" ContextMenu="{DynamicResource ItemContextMenu}" AlternationCount="2" Background="Gray" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-
+        
+        
+        <ScrollViewer VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Height="Auto">
+            <StackPanel VerticalAlignment="Stretch" Height="Auto">
+            <ListView ItemsSource="{Binding}" Name="listView"  BorderBrush="Gray" ContextMenu="{DynamicResource ItemContextMenu}" AlternationCount="2" Background="Gray" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -107,6 +113,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </StackPanel>
-    </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
