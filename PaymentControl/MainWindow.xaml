@@ -98,12 +98,13 @@
                     </DockPanel>
                 </StackPanel>
             </TabItem>
+            
             <TabItem Header="TabItem">
                 <DockPanel Margin="0,5,0,0" LastChildFill="True">
-                    <ComboBox x:Name="kindSelectBox"  SelectedIndex="0" Text="道具" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="kindSelectBox_SelectionChanged" />
-                    <ComboBox x:Name="prioritySelectBox" SelectedIndex="2" Text="中" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="60" Background="Gray" Foreground="White" SelectionChanged="prioritySelectBox_SelectionChanged"/>
-                    <ComboBox x:Name="statusSelectBox" SelectedIndex="0"  Text="検討中" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="80" Background="Gray" Foreground="White" SelectionChanged="statusSelectBox_SelectionChanged"/>
-                    <ComboBox x:Name="systemSelectBox" SelectedIndex="0" Text="買切り" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Width="Auto" Background="Gray" Foreground="White" SelectionChanged="systemSelectBox_SelectionChanged" />
+                    <ComboBox x:Name="kindSelectBox"  SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="kindSelectBox_SelectionChanged" />
+                    <ComboBox x:Name="prioritySelectBox" SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="60" Background="Gray" Foreground="White" SelectionChanged="prioritySelectBox_SelectionChanged"/>
+                    <ComboBox x:Name="statusSelectBox" SelectedIndex="0"  Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="80" Background="Gray" Foreground="White" SelectionChanged="statusSelectBox_SelectionChanged"/>
+                    <ComboBox x:Name="systemSelectBox" SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Width="Auto" Background="Gray" Foreground="White" SelectionChanged="systemSelectBox_SelectionChanged" />
                 </DockPanel>
             </TabItem>
         </TabControl>

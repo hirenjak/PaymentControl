@@ -254,9 +254,20 @@ namespace PaymentControl
 
         private void ListExtractions()
         {
-            List<ItemsValue> targetID = new List<ItemsValue>();
             renderLists = Function.CopyList(lists);
-            
+
+            ExtractionToKind();
+            ExtractionToPriority();
+            ExtractionToStatus();
+            ExtractionToSystem();
+
+            listView.ItemsSource = renderLists;
+            listView.Items.Refresh();
+        }
+        private void ExtractionToKind()
+        {
+            List<ItemsValue> targetID = new List<ItemsValue>();
+
             if ((string)kindSelectBox.SelectedValue != "")
             {
                 foreach (var value in renderLists)
@@ -272,10 +283,11 @@ namespace PaymentControl
             {
                 renderLists.Remove(targetID[ID]);
             }
+        }
+        private void ExtractionToPriority()
+        {
+            List<ItemsValue> targetID = new List<ItemsValue>();
 
-
-            targetID = new List<ItemsValue>();
-            
 
             if ((string)prioritySelectBox.SelectedValue != "")
             {
@@ -292,8 +304,10 @@ namespace PaymentControl
             {
                 renderLists.Remove(targetID[ID]);
             }
-
-            targetID = new List<ItemsValue>();
+        }
+        private void ExtractionToStatus()
+        {
+            List<ItemsValue> targetID = new List<ItemsValue>();
 
             if ((string)statusSelectBox.SelectedValue != "")
             {
@@ -310,9 +324,10 @@ namespace PaymentControl
             {
                 renderLists.Remove(targetID[ID]);
             }
-
-
-            targetID = new List<ItemsValue>();
+        }
+        private void ExtractionToSystem()
+        {
+            List<ItemsValue> targetID = new List<ItemsValue>();
 
             if ((string)systemSelectBox.SelectedValue != "")
             {
@@ -329,10 +344,6 @@ namespace PaymentControl
             {
                 renderLists.Remove(targetID[ID]);
             }
-
-            listView.ItemsSource = renderLists;
-            listView.Items.Refresh();
         }
-        
     }
 }
