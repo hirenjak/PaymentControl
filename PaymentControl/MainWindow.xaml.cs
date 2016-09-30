@@ -22,6 +22,7 @@ namespace PaymentControl
     public partial class MainWindow : Window
     {
         public ObservableCollection<ItemsValue> lists;
+        public ObservableCollection<ItemsValue> renderLists;
 
         public MainWindow()
         {
@@ -36,7 +37,8 @@ namespace PaymentControl
                 lists = new ObservableCollection<ItemsValue>();
             }
 
-            listView.DataContext = lists;
+            renderLists = Function.CopyList(lists);
+            listView.DataContext = renderLists;
             
             BoxItemsSetting();
         }
@@ -101,6 +103,29 @@ namespace PaymentControl
 
             systemBox.Items.Add("買切り");
             systemBox.Items.Add("月額");
+
+            kindSelectBox.Items.Add("");
+            kindSelectBox.Items.Add("道具");
+            kindSelectBox.Items.Add("VR機器");
+            kindSelectBox.Items.Add("テーブルゲーム");
+            kindSelectBox.Items.Add("PC周辺機器");
+            kindSelectBox.Items.Add("アダルト");
+
+            prioritySelectBox.Items.Add("");
+            prioritySelectBox.Items.Add("最高");
+            prioritySelectBox.Items.Add("高");
+            prioritySelectBox.Items.Add("中");
+            prioritySelectBox.Items.Add("低");
+            prioritySelectBox.Items.Add("最低");
+
+            statusSelectBox.Items.Add("");
+            statusSelectBox.Items.Add("検討中");
+            statusSelectBox.Items.Add("購入予定");
+            statusSelectBox.Items.Add("購入済み");
+
+            systemSelectBox.Items.Add("");
+            systemSelectBox.Items.Add("買切り");
+            systemSelectBox.Items.Add("月額");
         }
 
         /// <summary>入力したデータをリストに適用</summary>
@@ -206,6 +231,108 @@ namespace PaymentControl
                 }
             }
         }
-    }
 
+        private void kindSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListExtractions();
+        }
+
+        private void prioritySelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListExtractions();
+        }
+
+        private void statusSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListExtractions();
+        }
+
+        private void systemSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListExtractions();
+        }
+
+        private void ListExtractions()
+        {
+            List<ItemsValue> targetID = new List<ItemsValue>();
+            renderLists = Function.CopyList(lists);
+            
+            if ((string)kindSelectBox.SelectedValue != "")
+            {
+                foreach (var value in renderLists)
+                {
+                    if (value.kind != (string)kindSelectBox.SelectedValue)
+                    {
+                        targetID.Add(value);
+                    }
+                }
+            }
+
+            for (int ID = 0; ID < targetID.Count; ID++)
+            {
+                renderLists.Remove(targetID[ID]);
+            }
+
+
+            targetID = new List<ItemsValue>();
+            
+
+            if ((string)prioritySelectBox.SelectedValue != "")
+            {
+                foreach (var value in renderLists)
+                {
+                    if (value.priority != (string)prioritySelectBox.SelectedValue)
+                    {
+                        targetID.Add(value);
+                    }
+                }
+            }
+
+            for (int ID = 0; ID < targetID.Count; ID++)
+            {
+                renderLists.Remove(targetID[ID]);
+            }
+
+            targetID = new List<ItemsValue>();
+
+            if ((string)statusSelectBox.SelectedValue != "")
+            {
+                foreach (var value in renderLists)
+                {
+                    if (value.status != (string)statusSelectBox.SelectedValue)
+                    {
+                        targetID.Add(value);
+                    }
+                }
+            }
+
+            for (int ID = 0; ID < targetID.Count; ID++)
+            {
+                renderLists.Remove(targetID[ID]);
+            }
+
+
+            targetID = new List<ItemsValue>();
+
+            if ((string)systemSelectBox.SelectedValue != "")
+            {
+                foreach (var value in renderLists)
+                {
+                    if (value.system != (string)systemSelectBox.SelectedValue)
+                    {
+                        targetID.Add(value);
+                    }
+                }
+            }
+
+            for (int ID = 0; ID < targetID.Count; ID++)
+            {
+                renderLists.Remove(targetID[ID]);
+            }
+
+            listView.ItemsSource = renderLists;
+            listView.Items.Refresh();
+        }
+        
+    }
 }

@@ -8,7 +8,7 @@ namespace PaymentControl
     /// <summary> それぞれのアイテムを保存しておくためのクラス </summary>
     public class ItemsValue : INotifyPropertyChanged
     {
-        public BitmapImage picture { get; }
+        public BitmapImage picture { set; get; }
         public long ID { get; set; }
         public string status { get; set; }
         public string priority { get; set; }
@@ -38,6 +38,7 @@ namespace PaymentControl
 
             }
         }
+        
 
         /// <summary>INotifyPropertyChangedで必要</summary>
         public event PropertyChangedEventHandler PropertyChanged;
