@@ -54,8 +54,13 @@
                     <TextBlock Text="備考 : " Margin="0,0,0,0" Foreground="White"/>
                     <TextBlock Text="{Binding supplemental}" Margin="0,0,10,0" Foreground="White"/>
                 </DockPanel>
+                
             </StackPanel>
         </DataTemplate>
+
+        <Style x:Key="myListView" TargetType="ListView">
+            
+        </Style>
 
         <ContextMenu x:Key="ItemContextMenu">
             <MenuItem Header="編集" Click="MenuItem_Click"/>
@@ -63,8 +68,50 @@
 
         <Style x:Key="myHedderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed"/>
+            
+            </Style>
+
+        <Style x:Key="myCBoxItem" TargetType="{x:Type ComboBoxItem}">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF767676"/>
+
+
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Foreground" Value="Black"/>
+                </Trigger>
+            </Style.Triggers>
+
         </Style>
 
+        <Style x:Key="myCBox" TargetType="{x:Type ComboBox}">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource myCBoxItem}"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="SelectedIndex" Value="0"/>
+
+
+        </Style>
+
+        <Style x:Key="myTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+        </Style>
+        
+        <Style x:Key="myButton" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+        </Style>
 
     </Window.Resources>
     <DockPanel  Background="Gray" Width="Auto" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" >
@@ -74,44 +121,44 @@
             <TabItem Header="追加・編集">
                 <StackPanel>
                     <DockPanel Margin="0,5,0,0" LastChildFill="True">
-                        <Button x:Name="button" Content="画像選択" Margin="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_PictSelect_Click"/>
-                        <TextBox x:Name="pictureAddressBox" Margin="5,0,0,0" HorizontalAlignment="Left" Width="120" IsReadOnly="True"  Background="Gray" Foreground="White"/>
+                        <Button Style="{StaticResource myButton}" x:Name="button" Content="画像選択" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_PictSelect_Click"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="pictureAddressBox" HorizontalAlignment="Left" Width="120" IsReadOnly="True"/>
 
-                        <ComboBox x:Name="kindBox"  SelectedIndex="0" Text="道具" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" />
-                        <ComboBox x:Name="priorityBox" SelectedIndex="2" Text="中" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="60" Background="Gray" Foreground="White"/>
-                        <ComboBox x:Name="statusBox" SelectedIndex="0"  Text="検討中" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="80" Background="Gray" Foreground="White"/>
-                        <ComboBox x:Name="systemBox" SelectedIndex="0" Text="買切り" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Width="Auto" Background="Gray" Foreground="White" />
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="kindBox" Text="道具" VerticalAlignment="Top" Width="120"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="priorityBox" Text="中" VerticalAlignment="Top" Width="60" SelectedIndex="2"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="statusBox" Text="検討中" VerticalAlignment="Top" Width="80"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="systemBox" Text="買切り" VerticalAlignment="Top" Width="Auto"/>
                         
                     </DockPanel>
 
-                    <DockPanel Margin="0,5,0,0" LastChildFill="True">
-                        <TextBox x:Name="nameBox"  Text="nameBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White"/>
-                        <TextBox x:Name="priceBox"  Text="0" Height="23" Width="50" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White"/>
-                        <TextBox x:Name="supplementalBox" Width="Auto" Text="supplementalBox" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Background="Gray" Foreground="White"/>
+                    <DockPanel Margin="0,5,5,0" LastChildFill="True">
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="nameBox" Text="nameBox" VerticalAlignment="Top" Width="120"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="priceBox" Text="0" Width="50" VerticalAlignment="Top"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="supplementalBox" Text="supplementalBox" Width="Auto" VerticalAlignment="Top"/>
                     </DockPanel>
 
                     <DockPanel Margin="0,5,0,0" LastChildFill="True">
-                        <TextBox x:Name="originPageBox"  Text="originPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White" Width="260"/>
-                        <TextBox x:Name="paymentPageBox"  Text="paymentPageBox" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Background="Gray" Foreground="White" Width="Auto"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="originPageBox" Text="originPageBox" VerticalAlignment="Top" Width="260"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="paymentPageBox" Text="paymentPageBox" VerticalAlignment="Top" Width="Auto"/>
                     </DockPanel>
 
                     <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="0,5,0,5">
-                        <Button x:Name="button_Apply"  Content="Apply" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Apply_Click" Background="Gray" Foreground="White"/>
-                        <Button x:Name="button_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Margin="5,0,0,0" Click="button_Save_Click" Background="Gray" Foreground="White"/>
+                        <Button Style="{StaticResource myButton}" x:Name="button_Apply"  Content="Apply" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="button_Apply_Click"/>
+                        <Button Style="{StaticResource myButton}" x:Name="button_Save" Content="Save" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="75" Click="button_Save_Click"/>
                     </DockPanel>
                 </StackPanel>
             </TabItem>
             
             <TabItem Header="閲覧">
                 <StackPanel>
-                    <DockPanel Margin="0,5,0,0" LastChildFill="True">
-                        <ComboBox x:Name="kindSelectBox"  SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="SelectBox_SelectionChanged" />
-                        <ComboBox x:Name="prioritySelectBox" SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="60" Background="Gray" Foreground="White" SelectionChanged="SelectBox_SelectionChanged"/>
-                        <ComboBox x:Name="statusSelectBox" SelectedIndex="0"  Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="80" Background="Gray" Foreground="White" SelectionChanged="SelectBox_SelectionChanged"/>
-                        <ComboBox x:Name="systemSelectBox" SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,5,0" Width="Auto" Background="Gray" Foreground="White" SelectionChanged="SelectBox_SelectionChanged" />
+                    <DockPanel Margin="0,5,5,0" LastChildFill="True">
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="kindSelectBox" VerticalAlignment="Top" Width="120" SelectionChanged="SelectBox_SelectionChanged"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="prioritySelectBox" VerticalAlignment="Top" Width="60" SelectionChanged="SelectBox_SelectionChanged"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="statusSelectBox" VerticalAlignment="Top" Width="80" SelectionChanged="SelectBox_SelectionChanged"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="systemSelectBox" VerticalAlignment="Top" Width="Auto" SelectionChanged="SelectBox_SelectionChanged"/>
                     </DockPanel>
 
-                    <DockPanel Margin="0,5,0,0" LastChildFill="True">
+                    <DockPanel Margin="0,5,5,0" LastChildFill="True">
                         <TextBlock Text="合計金額 : \" Foreground="White"/>
                         <TextBlock Name="totalPriceBox" Text="{Binding totalPrice, UpdateSourceTrigger=PropertyChanged}" Width="Auto" Foreground="White" />
                     </DockPanel>
@@ -119,37 +166,37 @@
             </TabItem>
             
             <TabItem Header="設定">
-                <StackPanel>
+                <StackPanel Height="Auto" VerticalAlignment="Stretch">
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <ComboBox x:Name="kindSettingBox" HorizontalAlignment="Left"  SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="kindSelectBox_SelectionChanged"/>
-                        <Button x:Name="kindSettingDeleteButton" Content="Delete" Width="60" Height="23" Margin="5,0,0,0" Click="SettingDeleteButton_Click"/>
-                        <TextBox x:Name="kindSettingText" Width="120" Height="23" Margin="5,0,0,0"/>
-                        <Button x:Name="kindSettingAddButton" Content="Add" Width="60" Height="23" Margin="5,0,0,0" Click="kindSettingAddButton_Click"/>
-                        <Button x:Name="kindSettingChangeButton" Content="Change" Width="60" Height="23" Margin="5,0,0,0" Click="SettingChangeButton_Click"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="kindSettingBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="kindSettingDeleteButton" Content="Delete" Width="60" Click="SettingDeleteButton_Click"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="kindSettingText" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="kindSettingAddButton" Content="Add" Width="60" Click="SettingAddButton_Click"/>
+                        <Button Style="{StaticResource myButton}" x:Name="kindSettingChangeButton" Content="Change" Width="60" Click="SettingChangeButton_Click"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <ComboBox x:Name="prioritySettingBox" HorizontalAlignment="Left" SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="prioritySelectBox_SelectionChanged"/>
-                        <Button x:Name="proritySettingDeleteButton" Content="Delete" Width="60" Height="23" Margin="5,0,0,0" Click="SettingDeleteButton_Click"/>
-                        <TextBox x:Name="proritySettingText" Width="120" Height="23" Margin="5,0,0,0"/>
-                        <Button x:Name="proritySettingAddButton" Content="Add" Width="60" Height="23" Margin="5,0,0,0"  Click="kindSettingAddButton_Click"/>
-                        <Button x:Name="proritySettingChangeButton" Content="Change" Width="60" Height="23" Margin="5,0,0,0" Click="SettingChangeButton_Click"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="prioritySettingBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="proritySettingDeleteButton" Content="Delete" Width="60" Click="SettingDeleteButton_Click"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="proritySettingText" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="proritySettingAddButton" Content="Add" Width="60" Click="SettingAddButton_Click"/>
+                        <Button Style="{StaticResource myButton}" x:Name="proritySettingChangeButton" Content="Change" Width="60" Click="SettingChangeButton_Click"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                        <ComboBox x:Name="statusSettingBox" HorizontalAlignment="Left" SelectedIndex="0"  Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="statusSelectBox_SelectionChanged"/>
-                        <Button x:Name="statusSettingDeleteButton" Content="Delete" Width="60" Height="23" Margin="5,0,0,0" Click="SettingDeleteButton_Click"/>
-                        <TextBox x:Name="statusSettingText" Width="120" Height="23" Margin="5,0,0,0"/>
-                        <Button x:Name="statusSettingAddButton" Content="Add" Width="60" Height="23" Margin="5,0,0,0"  Click="kindSettingAddButton_Click"/>
-                        <Button x:Name="statusSettingChangeButton" Content="Change" Width="60" Height="23" Margin="5,0,0,0" Click="SettingChangeButton_Click"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="statusSettingBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="statusSettingDeleteButton" Content="Delete" Width="60" Click="SettingDeleteButton_Click"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="statusSettingText" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="statusSettingAddButton" Content="Add" Width="60" Click="SettingAddButton_Click"/>
+                        <Button Style="{StaticResource myButton}" x:Name="statusSettingChangeButton" Content="Change" Width="60" Click="SettingChangeButton_Click"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,5,0,5">
-                        <ComboBox x:Name="systemSettingBox" HorizontalAlignment="Left" SelectedIndex="0" Text="" Height="23" VerticalAlignment="Top" Margin="5,0,0,0" Width="120" Background="Gray" Foreground="White" SelectionChanged="systemSelectBox_SelectionChanged"/>
-                        <Button x:Name="systemSettingDeleteButton" Content="Delete" Width="60" Height="23" Margin="5,0,0,0" Click="SettingDeleteButton_Click"/>
-                        <TextBox x:Name="systemSettingText" Width="120" Height="23" Margin="5,0,0,0"/>
-                        <Button x:Name="systemSettingAddButton" Content="Add" Width="60" Height="23" Margin="5,0,0,0"  Click="kindSettingAddButton_Click"/>
-                        <Button x:Name="systemSettingChangeButton" Content="Change" Width="60" Height="23" Margin="5,0,0,0" Click="SettingChangeButton_Click"/>
+                        <ComboBox Style="{StaticResource myCBox}" x:Name="systemSettingBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="systemSettingDeleteButton" Content="Delete" Width="60" Click="SettingDeleteButton_Click"/>
+                        <TextBox Style="{StaticResource myTextBox}" x:Name="systemSettingText" Width="120"/>
+                        <Button Style="{StaticResource myButton}" x:Name="systemSettingAddButton" Content="Add" Width="60" Click="SettingAddButton_Click"/>
+                        <Button Style="{StaticResource myButton}" x:Name="systemSettingChangeButton" Content="Change" Width="60" Click="SettingChangeButton_Click"/>
                     </StackPanel>
                 </StackPanel>
             </TabItem>
@@ -167,8 +214,8 @@
 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource myHedderStyle}">
-                        <GridViewColumn CellTemplate="{StaticResource ListImageTemplate}"/>
-                        <GridViewColumn CellTemplate="{StaticResource ListDataTemplate}"/>
+                            <GridViewColumn CellTemplate="{StaticResource ListImageTemplate}"/>
+                            <GridViewColumn CellTemplate="{StaticResource ListDataTemplate}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
