@@ -24,6 +24,8 @@ namespace PaymentControl
         public ObservableCollection<ItemsValue> lists;
         public ObservableCollection<ItemsValue> renderLists;
 
+        Data data;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,9 +41,13 @@ namespace PaymentControl
 
             renderLists = Function.CopyList(lists);
             listView.DataContext = renderLists;
+
+            data = new Data();
+            totalPriceBox.DataContext = data;
             
             BoxItemsSetting();
         }
+        
 
         /// <summary>リストをファイルから読み込む</summary>
         /// <returns>読み込んだリストデータ</returns>
@@ -163,10 +169,10 @@ namespace PaymentControl
                 }
             }
 
-            Console.WriteLine(listView.Height.ToString());
-
             // データ照合が無い場合に追加を行う
             lists.Add(new ItemsValue(tempID) { name = nameBox.Text, kind = kindBox.Text, price = int.Parse(priceBox.Text), originalPaget = originPageBox.Text, paymentPage = paymentPageBox.Text, priority = priorityBox.Text, status = statusBox.Text, supplemental = supplementalBox.Text, system = systemBox.Text });
+            
+            listView.Items.Refresh();
         }
 
         /// <summary>ファイルとしてリストを出力</summary>
@@ -232,22 +238,7 @@ namespace PaymentControl
             }
         }
 
-        private void kindSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListExtractions();
-        }
-
-        private void prioritySelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListExtractions();
-        }
-
-        private void statusSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ListExtractions();
-        }
-
-        private void systemSelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SelectBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ListExtractions();
         }
@@ -260,6 +251,14 @@ namespace PaymentControl
             ExtractionToPriority();
             ExtractionToStatus();
             ExtractionToSystem();
+
+            data.totalPrice = 0;
+            foreach(var value in renderLists)
+            {
+                data.totalPrice += value.price;
+            }
+
+            totalPriceBox.Text = data.totalPrice.ToString();
 
             listView.ItemsSource = renderLists;
             listView.Items.Refresh();
@@ -345,5 +344,22 @@ namespace PaymentControl
                 renderLists.Remove(targetID[ID]);
             }
         }
+
+        #region 設定欄
+        private void SettingDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingAddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SettingChangeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
