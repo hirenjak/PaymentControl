@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PaymentControl"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="570" MaxWidth="570" MinWidth="570">
+        Title="MainWindow" Height="700" Width="570" MaxWidth="570" MinWidth="570">
 
     <Window.Resources>
         <Style TargetType="{x:Type ListView}">
@@ -18,58 +18,11 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="ListImageTemplate">
-            <StackPanel HorizontalAlignment="Left" Width="60">
-                <Image Source="{Binding picture}" Width="50" Height="50"/>
-            </StackPanel>
-        </DataTemplate>
-
-        <DataTemplate x:Key="ListDataTemplate">
-            <StackPanel Margin="0,0,0,0">
-                <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
-                    <TextBlock Text="商品名 : " Foreground="White" />
-                    <TextBlock Text="{Binding name}" Width="150" Foreground="White"/>
-
-                    <TextBlock Text="種別: " Foreground="White"/>
-                    <TextBlock Text="{Binding kind}" Foreground="White"/>
-                </DockPanel>
-                
-                <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
-                    <TextBlock Text="価格 : \" Foreground="White"/>
-                    <TextBlock Text="{Binding price}" Width="75" Foreground="White"/>
-
-                    <TextBlock Text="現状 : " Foreground="White" />
-                    <TextBlock Text="{Binding status}" Width="75" Foreground="White"/>
-
-                    <TextBlock Text="優先度 : " Foreground="White"/>
-                    <TextBlock Text="{Binding priority}" Width="75" Foreground="White"/>
-                </DockPanel>
-                
-
-
-                <DockPanel Margin="0,0,0,0" Width="Auto" LastChildFill="True">
-                    <TextBlock Text="料金体制 : " Margin="0,0,0,0" Foreground="White"/>
-                    <TextBlock Text="{Binding system}" Margin="0,0,10,0" Foreground="White" Width="40"/>
-
-                    <TextBlock Text="備考 : " Margin="0,0,0,0" Foreground="White"/>
-                    <TextBlock Text="{Binding supplemental}" Margin="0,0,10,0" Foreground="White"/>
-                </DockPanel>
-                
-            </StackPanel>
-        </DataTemplate>
-
-        <Style x:Key="myListView" TargetType="ListView">
-            
-        </Style>
-
-        <ContextMenu x:Key="ItemContextMenu">
-            <MenuItem Header="編集" Click="MenuItem_Click"/>
-        </ContextMenu>
 
         <Style x:Key="myHedderStyle" TargetType="{x:Type GridViewColumnHeader}">
             <Setter Property="Visibility" Value="Collapsed"/>
-            
-            </Style>
+
+        </Style>
 
         <Style x:Key="myCBoxItem" TargetType="{x:Type ComboBoxItem}">
             <Setter Property="Background" Value="Gray"/>
@@ -107,11 +60,66 @@
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderBrush" Value="#FF707070"/>
         </Style>
-        
+
+        <Style x:Key="myTextBlock" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="Height" Value="23"/>
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
         <Style x:Key="myButton" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="23"/>
             <Setter Property="Margin" Value="5,0,0,0"/>
         </Style>
+
+
+        <DataTemplate x:Key="ListDataTemplate">
+            <DockPanel Margin="0,0,0,0" >
+                <Image Source="{Binding picture}" DockPanel.Dock="Left" Width="50" Height="50"/>
+
+                <DockPanel Margin="0,0,0,0" DockPanel.Dock="Top" Width="Auto" LastChildFill="True">
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="商品名 : " Background="Transparent"/>
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding name}" Width="150" Background="Transparent"/>
+
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding kind}" Background="Transparent"/>
+                </DockPanel>
+
+                <Line DockPanel.Dock="Top" Stroke="#FF838383" StrokeThickness="1" X1="0" X2="460"/>
+                
+                <DockPanel Margin="0,0,0,0" DockPanel.Dock="Top" Width="Auto" LastChildFill="True">
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="価格 : \" Background="Transparent"/>
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding price}" Width="75" Background="Transparent"/>
+
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="現状 : " Foreground="White" Background="Transparent"/>
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding status}" Width="75" Background="Transparent"/>
+
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="優先度 : " Foreground="White" Background="Transparent"/>
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding priority}" Width="75" Background="Transparent"/>
+                </DockPanel>
+                
+                <Line DockPanel.Dock="Top" Stroke="#FF838383" StrokeThickness="1" X1="0" X2="460"/>
+
+                <DockPanel Margin="0,0,0,0" DockPanel.Dock="Top" Width="Auto" LastChildFill="True">
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="料金体制 : " Background="Transparent"/>
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding system}" Width="40" Background="Transparent"/>
+
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="備考 : " Background="Transparent"/>
+                    <TextBlock Style="{StaticResource myTextBlock}" Text="{Binding supplemental}" Background="Transparent"/>
+                </DockPanel>
+                <Line Stroke="#FF5B5B5B" StrokeThickness="2" X1="-50" X2="460"/>
+            </DockPanel>
+        </DataTemplate>
+
+        <Style x:Key="myListView" TargetType="ListView">
+            
+        </Style>
+
+        <ContextMenu x:Key="ItemContextMenu">
+            <MenuItem Header="編集" Click="MenuItem_Click"/>
+        </ContextMenu>
+
 
     </Window.Resources>
     <DockPanel  Background="Gray" Width="Auto" HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" >
@@ -214,8 +222,7 @@
 
                 <ListView.View>
                     <GridView ColumnHeaderContainerStyle="{StaticResource myHedderStyle}">
-                            <GridViewColumn CellTemplate="{StaticResource ListImageTemplate}"/>
-                            <GridViewColumn CellTemplate="{StaticResource ListDataTemplate}"/>
+                        <GridViewColumn CellTemplate="{StaticResource ListDataTemplate}"/>
                     </GridView>
                 </ListView.View>
             </ListView>
