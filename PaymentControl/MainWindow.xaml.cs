@@ -43,7 +43,6 @@ namespace PaymentControl
             listView.DataContext = renderLists;
 
             data = new Data();
-            totalPriceBox.DataContext = data;
             
             BoxItemsSetting();
         }
@@ -54,10 +53,10 @@ namespace PaymentControl
         private ObservableCollection<ItemsValue> ListLoad()
         {
             ObservableCollection<ItemsValue> results = new ObservableCollection<ItemsValue>();
-            if (File.Exists(@"data.bin"))
+            if (File.Exists(@"data\data.bin"))
             {
                 // data.binというファイルからアイテムのデータを読み込む
-                using (FileStream fStream = new FileStream(@"data.bin", FileMode.Open))
+                using (FileStream fStream = new FileStream(@"data\data.bin", FileMode.Open))
                 using (BinaryReader bReader = new BinaryReader(fStream))
                 {
                     int NUM = bReader.ReadInt32();
@@ -183,7 +182,7 @@ namespace PaymentControl
                 long ID = DateTime.Now.Ticks;
                 if (!Directory.Exists(".\\cache\\picture")) { Directory.CreateDirectory(".\\cache\\picture"); }
                 File.Copy(dialog.FileName, ".\\cache\\picture\\" + ID);
-                pictureAddressBox.Text = ID.ToString();
+                //pictureAddressBox.Text = ID.ToString();
             }
         }
 
@@ -196,16 +195,16 @@ namespace PaymentControl
             {
                 if(value.ID == tempID)
                 {
-                    pictureAddressBox.Text = value.ID.ToString();
-                    nameBox.Text = value.name;
-                    kindBox.Text = value.kind;
-                    priceBox.Text = value.price.ToString();
-                    statusBox.Text = value.status;
-                    originPageBox.Text = value.originalPaget;
-                    paymentPageBox.Text = value.paymentPage;
-                    priorityBox.Text = value.priority;
-                    supplementalBox.Text = value.supplemental;
-                    systemBox.Text = value.system;
+                    //pictureAddressBox.Text = value.ID.ToString();
+                    //nameBox.Text = value.name;
+                    //kindBox.Text = value.kind;
+                    //priceBox.Text = value.price.ToString();
+                    //statusBox.Text = value.status;
+                    //originPageBox.Text = value.originalPaget;
+                    //paymentPageBox.Text = value.paymentPage;
+                    //priorityBox.Text = value.priority;
+                    //supplementalBox.Text = value.supplemental;
+                    //systemBox.Text = value.system;
                     return;
                 }
             }
