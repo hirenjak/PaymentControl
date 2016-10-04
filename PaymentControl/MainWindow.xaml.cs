@@ -86,52 +86,35 @@ namespace PaymentControl
 
             return results;
         }
-
+        
+        private void CBoxAdd(ComboBox targetBox, string path)
+        {
+            using (StreamReader sReader = new StreamReader(path))
+            {
+                string readValue = "";
+                while ((readValue = sReader.ReadLine()) != null)
+                {
+                    targetBox.Items.Add(readValue);
+                }
+            }
+        }
 
         /// <summary>各コンボボックスの項目を設定</summary>
         private void BoxItemsSetting()
         {
-            kindBox.Items.Add("道具");
-            kindBox.Items.Add("VR機器");
-            kindBox.Items.Add("テーブルゲーム");
-            kindBox.Items.Add("PC周辺機器");
-            kindBox.Items.Add("アダルト");
-
-            priorityBox.Items.Add("最高");
-            priorityBox.Items.Add("高");
-            priorityBox.Items.Add("中");
-            priorityBox.Items.Add("低");
-            priorityBox.Items.Add("最低");
-
-            statusBox.Items.Add("検討中");
-            statusBox.Items.Add("購入予定");
-            statusBox.Items.Add("購入済み");
-
-            systemBox.Items.Add("買切り");
-            systemBox.Items.Add("月額");
+            CBoxAdd(kindBox, @"data\Cbox\kind.txt");
+            CBoxAdd(priorityBox, @"data\Cbox\priority.txt");
+            CBoxAdd(statusBox, @"data\\Cbox\\status.txt");
+            CBoxAdd(systemBox, @"data\\Cbox\\system.txt");
 
             kindSelectBox.Items.Add("");
-            kindSelectBox.Items.Add("道具");
-            kindSelectBox.Items.Add("VR機器");
-            kindSelectBox.Items.Add("テーブルゲーム");
-            kindSelectBox.Items.Add("PC周辺機器");
-            kindSelectBox.Items.Add("アダルト");
-
+            CBoxAdd(kindSelectBox, @"data\\Cbox\\kind.txt");
             prioritySelectBox.Items.Add("");
-            prioritySelectBox.Items.Add("最高");
-            prioritySelectBox.Items.Add("高");
-            prioritySelectBox.Items.Add("中");
-            prioritySelectBox.Items.Add("低");
-            prioritySelectBox.Items.Add("最低");
-
+            CBoxAdd(prioritySelectBox, @"data\\Cbox\\priority.txt");
             statusSelectBox.Items.Add("");
-            statusSelectBox.Items.Add("検討中");
-            statusSelectBox.Items.Add("購入予定");
-            statusSelectBox.Items.Add("購入済み");
-
+            CBoxAdd(statusSelectBox, @"data\\Cbox\\status.txt");
             systemSelectBox.Items.Add("");
-            systemSelectBox.Items.Add("買切り");
-            systemSelectBox.Items.Add("月額");
+            CBoxAdd(systemSelectBox, @"data\\Cbox\\system.txt");
         }
 
         /// <summary>入力したデータをリストに適用</summary>
@@ -180,7 +163,7 @@ namespace PaymentControl
         /// <summary>ファイルとしてリストを出力</summary>
         private void button_Save_Click(object sender, RoutedEventArgs e)
         {
-            using (FileStream fStream = new FileStream(@"data.bin", FileMode.Create))
+            using (FileStream fStream = new FileStream(@"data\data.bin", FileMode.Create))
             using (BinaryWriter bWriter = new BinaryWriter(fStream))
             {
                 bWriter.Write(lists.Count);
