@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Windows.Controls;
 
 namespace PaymentControl
 {
@@ -33,5 +34,19 @@ namespace PaymentControl
             return results;
         }
 
+
+        public static void CBoxAdd(ComboBox targetBox, string path)
+        {
+            using (StreamReader sReader = new StreamReader(path))
+            {
+                string readValue = "";
+                while ((readValue = sReader.ReadLine()) != null)
+                {
+                    targetBox.Items.Add(readValue);
+                }
+            }
+        }
     }
+
+
 }

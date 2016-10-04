@@ -87,34 +87,22 @@ namespace PaymentControl
             return results;
         }
         
-        private void CBoxAdd(ComboBox targetBox, string path)
-        {
-            using (StreamReader sReader = new StreamReader(path))
-            {
-                string readValue = "";
-                while ((readValue = sReader.ReadLine()) != null)
-                {
-                    targetBox.Items.Add(readValue);
-                }
-            }
-        }
-
         /// <summary>各コンボボックスの項目を設定</summary>
         private void BoxItemsSetting()
         {
-            CBoxAdd(kindBox, @"data\Cbox\kind.txt");
-            CBoxAdd(priorityBox, @"data\Cbox\priority.txt");
-            CBoxAdd(statusBox, @"data\\Cbox\\status.txt");
-            CBoxAdd(systemBox, @"data\\Cbox\\system.txt");
+            Function.CBoxAdd(kindBox, @"data\Cbox\kind.txt");
+            Function.CBoxAdd(priorityBox, @"data\Cbox\priority.txt");
+            Function.CBoxAdd(statusBox, @"data\\Cbox\\status.txt");
+            Function.CBoxAdd(systemBox, @"data\\Cbox\\system.txt");
 
             kindSelectBox.Items.Add("");
-            CBoxAdd(kindSelectBox, @"data\\Cbox\\kind.txt");
+            Function.CBoxAdd(kindSelectBox, @"data\\Cbox\\kind.txt");
             prioritySelectBox.Items.Add("");
-            CBoxAdd(prioritySelectBox, @"data\\Cbox\\priority.txt");
+            Function.CBoxAdd(prioritySelectBox, @"data\\Cbox\\priority.txt");
             statusSelectBox.Items.Add("");
-            CBoxAdd(statusSelectBox, @"data\\Cbox\\status.txt");
+            Function.CBoxAdd(statusSelectBox, @"data\\Cbox\\status.txt");
             systemSelectBox.Items.Add("");
-            CBoxAdd(systemSelectBox, @"data\\Cbox\\system.txt");
+            Function.CBoxAdd(systemSelectBox, @"data\\Cbox\\system.txt");
         }
 
         /// <summary>入力したデータをリストに適用</summary>
@@ -248,6 +236,7 @@ namespace PaymentControl
             listView.ItemsSource = renderLists;
             listView.Items.Refresh();
         }
+
         private void ExtractionToKind()
         {
             List<ItemsValue> targetID = new List<ItemsValue>();
@@ -268,6 +257,7 @@ namespace PaymentControl
                 renderLists.Remove(targetID[ID]);
             }
         }
+
         private void ExtractionToPriority()
         {
             List<ItemsValue> targetID = new List<ItemsValue>();
@@ -289,6 +279,7 @@ namespace PaymentControl
                 renderLists.Remove(targetID[ID]);
             }
         }
+
         private void ExtractionToStatus()
         {
             List<ItemsValue> targetID = new List<ItemsValue>();
@@ -309,6 +300,7 @@ namespace PaymentControl
                 renderLists.Remove(targetID[ID]);
             }
         }
+
         private void ExtractionToSystem()
         {
             List<ItemsValue> targetID = new List<ItemsValue>();

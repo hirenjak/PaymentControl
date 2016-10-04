@@ -33,9 +33,15 @@
             <Style.Triggers>
                 <Trigger Property="IsFocused" Value="true">
                     <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Gray"/>
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="true">
                     <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Gray"/>
+                </Trigger>
+                <Trigger Property="IsSelected" Value="true">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Gray"/>
                 </Trigger>
             </Style.Triggers>
 
@@ -46,11 +52,7 @@
             <Setter Property="Margin" Value="5,0,0,0"/>
             <Setter Property="ItemContainerStyle" Value="{StaticResource myCBoxItem}"/>
             <Setter Property="Height" Value="23"/>
-            <Setter Property="Background" Value="Gray"/>
-            <Setter Property="Foreground" Value="White"/>
             <Setter Property="SelectedIndex" Value="0"/>
-
-
         </Style>
 
         <Style x:Key="myTextBox" TargetType="{x:Type TextBox}">
@@ -127,7 +129,7 @@
 
         <TabControl x:Name="tabControl" DockPanel.Dock="Top" VerticalAlignment="Top" Margin="0,0,0,0" Height="Auto" Background="DarkGray" >
             <TabItem Header="追加・編集">
-                <StackPanel Name="createPanel" Height="auto">
+                <StackPanel Name="createPanel">
                     <DockPanel Margin="0,5,0,0" LastChildFill="True">
                         <Button Style="{StaticResource myButton}" x:Name="button" Content="画像選択" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="button_PictSelect_Click"/>
                         <TextBox Style="{StaticResource myTextBox}" x:Name="pictureAddressBox" HorizontalAlignment="Left" Width="120" IsReadOnly="True"/>
